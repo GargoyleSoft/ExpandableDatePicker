@@ -1,11 +1,7 @@
 `ExpandableDatePicker` is a library written in Swift which makes the display of a drop-down `UIDatePicker` much simpler.  It also includes
 a table row to select the TimeZone that should be used with the date, which is expecially helpful when creating calendar items.
 
-
-- On your UITableViewController implement the `ExpandableDatePicker` protocol.
-- In your `viewDidLoad` method register the two cells the framework uses
-- Implement variables to store the selected date and the timeonze.
-- Set the `estimatedRowHeight` on your tableView to enable dynamically sized rows.
+You can use the below class as your starting point as it implements all the pieces required by the protocol.
 
 ##
 ```swift
@@ -16,7 +12,7 @@ class ViewController: UITableViewController, ExpandableDatePicker {
     // Not used directly by you, but is part of the protocol so the framework can use it.
     var datePickerIndexPath: IndexPath?
 
-    fileprivate var rowThatToggledDatePicker: Int!
+    fileprivate var rowThatTogglesDatePicker: Int!
 
     fileprivate var selectedDate = Date()
     fileprivate var selectedTimeZone = TimeZone.autoupdatingCurrent
@@ -41,7 +37,7 @@ extension ViewController {
             cell.onDateChanged = {
                 [unowned self] date in
                 self.selectedDate = date
-                self.tableView.reloadRows(at: [IndexPath(row: self.rowThatToggledDatePicker, section: indexPath.section)], with: .automatic)
+                self.tableView.reloadRows(at: [IndexPath(row: self.rowThatTogglesDatePicker, section: indexPath.section)], with: .automatic)
             }
 
             cell.datePicker.date = selectedDate
@@ -53,7 +49,8 @@ extension ViewController {
 
         let modelIndexPath = updatedModelIndexPath(for: indexPath)
 
-        if modelIndexPath.row == rowThatExpandsToDatePicker {
+        if modelIndexPath.row == rowThatTogglesDatePicker {
+	    // DateDisplayCell is a custom UITableViewCell that implements the ShowsDatePicker protocol
             let cell = DateDisplayCell.reusableCell(for: indexPath, in: tableView)
             cell.textLabel!.text = "Date:"
             cell.detailTextLabel?.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
@@ -86,9 +83,6 @@ extension ViewController {
 
             return
         }
-
-	// Store whichever row was selected to use for later. 
-	rowThatToggledDatePicker = indexPath.row
 
         // modelIndexPath is the new indexPath you use for which row was selected.
     }
