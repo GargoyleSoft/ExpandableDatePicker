@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.name         = "ExpandableDatePicker"
   s.summary      = "Expandable UIDatePicker and TimeZone selection for UITableView"
   s.version      = "0.1.0"
-  s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.license      = 'MIT'
   s.author             = { "Scott Grosch" => "Scott.Grosch@icloud.com" }
   s.homepage     = "https://github.com/GargoyleSoft/ExpandableDatePicker"
   s.source       = { :git => "https://github.com/GargoyleSoft/ExpandableDatePicker.git", :tag => "#{s.version}" }
