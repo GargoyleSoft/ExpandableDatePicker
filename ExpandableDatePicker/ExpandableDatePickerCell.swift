@@ -23,8 +23,8 @@
 
 import UIKit
 
-public class ExpandableDatePickerCell : UITableViewCell, ShowsDatePicker {
-    internal static let identifier = "1D72FAC3-6D57-4D57-AF49-386E37BF0089"
+open class ExpandableDatePickerCell : UITableViewCell {
+    public static let identifier = "1D72FAC3-6D57-4D57-AF49-386E37BF0089"
 
     public var datePicker: UIDatePicker!
     public var onDateChanged: ((Date) -> Void)!
@@ -57,7 +57,7 @@ public class ExpandableDatePickerCell : UITableViewCell, ShowsDatePicker {
         onDateChanged(sender.date)
     }
 
-    public static func reusableCell(for indexPath: IndexPath, in tableView: UITableView) -> ExpandableDatePickerCell {
+    open class func reusableCell(for indexPath: IndexPath, in tableView: UITableView) -> ExpandableDatePickerCell {
         return tableView.dequeueReusableCell(withIdentifier: ExpandableDatePickerCell.identifier, for: indexPath) as! ExpandableDatePickerCell
     }
 }

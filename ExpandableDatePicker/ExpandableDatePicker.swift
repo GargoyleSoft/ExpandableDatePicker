@@ -26,7 +26,7 @@ import UIKit
 
 /// This protocol should be applied to the `UITableViewCell` which is *selected* to make a date picker
 /// appear or disappear.
-/// - note: Do not place this on the `UITableViewCell` that actually *displays* the `UIPickerView`
+/// - note: Do not place this on the `UITableViewCell` that actually *displays* the `UIDatePicker`
 public protocol ShowsDatePicker: class { }
 
 
@@ -38,43 +38,33 @@ public protocol ExpandableDatePicker: class {
 }
 
 public extension ExpandableDatePicker {
-    /// Registers the two cells which will display the `UIDatePicker` and the timezone row.
-    ///
-    /// - note: You should call this from your `viewDidLoad()` method.
-    ///
-    /// - Parameter tableView: The `UITableView` which will shows the pickers.
-    public static func registerCells(for tableView: UITableView) {
-        tableView.register(ExpandableDatePickerCell.self, forCellReuseIdentifier: ExpandableDatePickerCell.identifier)
-        tableView.register(ExpandableDatePickerTimeZoneCell.self, forCellReuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
-    }
-
     /// Determines whether or not an inline date picker is currently showing.
     public var showingInlineDatePicker: Bool {
         return datePickerIndexPath != nil
     }
 
-    /// Returns an updated model row based on whether or not the date picker is displayed.  e.g. If row 3
+    /// Returns an updated `IndexPath` based on whether or not the date picker is displayed.  e.g. If row 3
     /// is currently showing an inline date picker, then what's displayed in row 5 is really model row 3
     /// because row 3 is the `UIDatePicker` and row 4 is the timezone picker.
     ///
     /// - parameter for: The `IndexPath` provided by the `UITableViewDataSource` or `UITableViewDelegate`
     ///
     /// - returns: The actual index into the data model to use, as opposed to `indexPath.row`
-    public func updatedModelRow(for indexPath: IndexPath) -> Int {
-        let row = indexPath.row
+    public func updatedModelIndexPath(for indexPath: IndexPath) -> IndexPath {
+        var row = indexPath.row
 
         // If they're not in the same section, don't change it
         guard let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.section == indexPath.section else {
-            return row
+            return IndexPath(row: row, section: indexPath.section)
         }
 
         // If the date picker is in a row above or the same as our current row, then all subsequent rows would
         // have to have their row upped by 2, meaning we have to reduce the model's row by 2 to acocunt for that.
         if datePickerIndexPath.row <= indexPath.row {
-            return row - 2
-        } else {
-            return row
+            row -= 2
         }
+
+        return IndexPath(row: row, section: indexPath.section)
     }
 
     /// Determines whether or not the indicated `indexPath` is the row that should currently be displaying
@@ -161,7 +151,7 @@ public extension ExpandableDatePicker {
             // Get rid of the currently visible inline date picker
             tableView.deleteRows(at: [datePickerIndexPath, timeZoneIndexPath], with: .automatic)
 
-            let previousControlCellRow = datePickerIndexPath.row - 2
+            let previousControlCellRow = datePickerIndexPath.row - 1
 
             self.datePickerIndexPath = nil
 

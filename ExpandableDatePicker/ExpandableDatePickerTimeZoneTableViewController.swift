@@ -39,12 +39,12 @@ internal class ExpandableDatePickerTimeZoneCellData {
     }
 }
 
-public class ExpandableDatePickerTimeZoneTableViewController : UITableViewController {
+open class ExpandableDatePickerTimeZoneTableViewController : UITableViewController {
     fileprivate var onChosen: ((TimeZone) -> Void)!
     fileprivate var tableData: [ExpandableDatePickerTimeZoneCellData] = []
     fileprivate var nodes: [ExpandableDatePickerTimeZoneCellData] = []
 
-    init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
+    public init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
         self.onChosen = onTimeZoneChosen
 
         super.init(style: .plain)
@@ -63,7 +63,7 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -102,21 +102,19 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
 
         let new = ExpandableDatePickerTimeZoneCellData(name: name, indentationLevel: indentationLevel, fullName: fullName)
         items.append(new)
-        
+
         guard rest.count > 0 else { return }
-        
+
         new.children = []
         buildTimeZoneData(items: &new.children!, fullName: fullName, parts: rest + [], indentationLevel: indentationLevel + 2)
     }
-}
 
-// MARK: - UITableViewDataSource
-public extension ExpandableDatePickerTimeZoneTableViewController {
-    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // MARK: - UITableViewDataSource
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
 
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
@@ -132,11 +130,8 @@ public extension ExpandableDatePickerTimeZoneTableViewController {
 
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
-public extension ExpandableDatePickerTimeZoneTableViewController {
-    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         precondition(onChosen != nil, "Must specify the onChosen block.")
 
         let data = tableData[indexPath.row]
@@ -182,15 +177,15 @@ public extension ExpandableDatePickerTimeZoneTableViewController {
                     indexPaths.append(ip)
                     tableData.insert(child, at: ip.row)
                 }
-
+                
                 tableView.insertRows(at: indexPaths, with: .automatic)
                 data.isExpanded = true
             }
         } else {
             let tz = TimeZone(identifier: data.fullName!)!
-
+            
             onChosen(tz)
-
+            
             _ = navigationController?.popViewController(animated: true)
         }
     }
