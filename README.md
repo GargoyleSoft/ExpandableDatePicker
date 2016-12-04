@@ -1,7 +1,7 @@
 ## Usage
 
 ExpandableDatePicker is a library written in Swift which makes the display of a drop-down `UIDatePicker` much simpler.  It also includes
-a table row to select the TimeZone that should be used with the date, which is expecially helpful when creating calendar items.
+a table row to select the TimeZone that should be used with the date, which is especially helpful when creating calendar items.
 
 You can use the below class as your starting point as it implements all the pieces required by the protocol.
 
