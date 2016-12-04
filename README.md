@@ -93,6 +93,11 @@ extension ViewController {
 
 ```
 
+### tableView(_:accessoryButtonTappedForRowWith:)
+
+Depending on your usage model you may need to duplicate the tableCellWasSelected functionality in tableView(_:accessoryButtonTappedForRowWith:). 
+When you call that method it handles properly showing or hiding the two extra table rows.
+
 ## Installation
 
 ### CocoaPods
