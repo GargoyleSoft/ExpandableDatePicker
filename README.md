@@ -50,7 +50,7 @@ extension ViewController {
         let modelIndexPath = updatedModelIndexPath(for: indexPath)
 
         if modelIndexPath.row == rowThatTogglesDatePicker {
-	    // DateDisplayCell is a custom UITableViewCell that implements the ShowsDatePicker protocol
+            // DateDisplayCell is a custom UITableViewCell that implements the ShowsDatePicker protocol.  See the Example project
             let cell = DateDisplayCell.reusableCell(for: indexPath, in: tableView)
             cell.textLabel!.text = "Date:"
             cell.detailTextLabel?.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
@@ -73,9 +73,10 @@ extension ViewController {
 extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {
+            // If tableCellWasSelected(at:) returns nil, they clicked on the time zone selector row.
             let vc = ExpandableDatePickerTimeZoneTableViewController {
-                [weak self] timeZone in
-                self?.selectedTimeZone = timeZone
+                [unowned self] timeZone in
+                self.selectedTimeZone = timeZone
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
 
