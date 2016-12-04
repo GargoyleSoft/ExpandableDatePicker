@@ -69,7 +69,7 @@ extension ViewController {
     }
 }
 
-// MARK: - UITableViewDelegate {
+// MARK: - UITableViewDelegate
 extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {

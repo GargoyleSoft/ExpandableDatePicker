@@ -15,16 +15,6 @@
 		D2A414771DF39B4F00A72640 /* NSIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A414721DF39B4F00A72640 /* NSIndexPath.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D2A4149C1DF3ED9700A72640 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2A414981DF3ED9600A72640 /* Example.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2A414831DF3ED9600A72640;
-			remoteInfo = Example;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		D2A414631DF39B3D00A72640 /* ExpandableDatePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableDatePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableDatePicker.h; sourceTree = "<group>"; };
@@ -34,7 +24,6 @@
 		D2A414701DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneCell.swift; sourceTree = "<group>"; };
 		D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneTableViewController.swift; sourceTree = "<group>"; };
 		D2A414721DF39B4F00A72640 /* NSIndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSIndexPath.swift; sourceTree = "<group>"; };
-		D2A414981DF3ED9600A72640 /* Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Example.xcodeproj; path = Example/Example.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,12 +37,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CCA62F0634B13D8EB33CD5FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2A414591DF39B3D00A72640 = {
 			isa = PBXGroup;
 			children = (
-				D2A414981DF3ED9600A72640 /* Example.xcodeproj */,
 				D2A414651DF39B3D00A72640 /* ExpandableDatePicker */,
 				D2A414641DF39B3D00A72640 /* Products */,
+				CCA62F0634B13D8EB33CD5FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,14 +73,6 @@
 				D2A414721DF39B4F00A72640 /* NSIndexPath.swift */,
 			);
 			path = ExpandableDatePicker;
-			sourceTree = "<group>";
-		};
-		D2A414991DF3ED9600A72640 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2A4149D1DF3ED9700A72640 /* Example.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,32 +130,17 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D2A414591DF39B3D00A72640;
 			productRefGroup = D2A414641DF39B3D00A72640 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = D2A414991DF3ED9600A72640 /* Products */;
-					ProjectRef = D2A414981DF3ED9600A72640 /* Example.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D2A414621DF39B3D00A72640 /* ExpandableDatePicker */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		D2A4149D1DF3ED9700A72640 /* Example.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Example.app;
-			remoteRef = D2A4149C1DF3ED9700A72640 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2A414611DF39B3D00A72640 /* Resources */ = {
