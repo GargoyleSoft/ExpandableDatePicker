@@ -1,4 +1,6 @@
-`ExpandableDatePicker` is a library written in Swift which makes the display of a drop-down `UIDatePicker` much simpler.  It also includes
+## Usage
+
+ExpandableDatePicker is a library written in Swift which makes the display of a drop-down `UIDatePicker` much simpler.  It also includes
 a table row to select the TimeZone that should be used with the date, which is expecially helpful when creating calendar items.
 
 You can use the below class as your starting point as it implements all the pieces required by the protocol.
@@ -91,4 +93,30 @@ extension ViewController {
 
 ```
 
+## Installation
 
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate ExpandableDatePicker into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'ExpandableDatePicker'
+end
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
