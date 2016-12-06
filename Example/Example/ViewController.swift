@@ -36,10 +36,9 @@ class ViewController: UITableViewController, ExpandableDatePicker {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.estimatedRowHeight = 44.0
-
-        tableView.register(ExpandableDatePickerCell.self, forCellReuseIdentifier: ExpandableDatePickerCell.identifier)
-        tableView.register(ExpandableDatePickerTimeZoneCell.self, forCellReuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
+        // Comes from ExpandableDatePicker but you can't directly call a static method via a protocol
+        // so we have to use our own class name.
+        ViewController.setup(tableView)
     }
 }
 

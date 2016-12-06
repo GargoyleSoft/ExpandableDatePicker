@@ -3,6 +3,9 @@
 ExpandableDatePicker is a library written in Swift which makes the display of a drop-down `UIDatePicker` much simpler.  It also includes
 a table row to select the TimeZone that should be used with the date, which is especially helpful when creating calendar items.
 
+For the cell you want to click on that causes the two new rows to appear and disappear you simply need to add the ShowsDatePicker protocol.
+There is nothing to implement from that protocol, it just needs to exist on the UITableViewCell subclass.
+
 You can use the below class as your starting point as it implements all the pieces required by the protocol.
 
 ##
@@ -22,12 +25,9 @@ class ViewController: UITableViewController, ExpandableDatePicker {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // The UIDatePicker needs to have dynamic sized rows
-        tableView.estimatedRowHeight = 44.0
-
-        // These are the cells which the framework defines for you to use.
-        tableView.register(ExpandableDatePickerCell.self, forCellReuseIdentifier: ExpandableDatePickerCell.identifier)
-        tableView.register(ExpandableDatePickerTimeZoneCell.self, forCellReuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
+        // Comes from ExpandableDatePicker but you can't directly call a static method via a protocol
+        // so we have to use our own class name.
+        ViewController.setup(tableView)
     }
 }
 
@@ -93,10 +93,27 @@ extension ViewController {
 
 ```
 
-### tableView(_:accessoryButtonTappedForRowWith:)
+### `tableView(_:accessoryButtonTappedForRowWith:)`
 
-Depending on your usage model you may need to duplicate the tableCellWasSelected functionality in tableView(_:accessoryButtonTappedForRowWith:). 
+Depending on your usage model you may need to duplicate the tableCellWasSelected functionality in `tableView(_:accessoryButtonTappedForRowWith:)`. 
 When you call that method it handles properly showing or hiding the two extra table rows.
+
+### Subclassing
+
+If you wish to subclass either `ExpandableDatePickerCell` or `ExpandableDatePickerTimeZoneCell` simply register the cell yourself _after_ the
+call to setup.  Both classes provide a static _identifier_ property that you can use for registering your cell.  
+
+```swift
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Comes from ExpandableDatePicker but you can't directly call a static method via a protocol
+        // so we have to use our own class name.
+        ViewController.setup(tableView)
+
+        tableView.register(MyCoolTimeZoneSubclassCell.self, forCellReuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
+    }
+```
 
 ## Installation
 
