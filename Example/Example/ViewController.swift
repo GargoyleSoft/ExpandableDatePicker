@@ -63,9 +63,8 @@ extension ViewController {
         let modelIndexPath = updatedModelIndexPath(for: indexPath)
 
         if modelIndexPath.row == rowThatExpandsToDatePicker {
-            let cell = DateDisplayCell.reusableCell(for: indexPath, in: tableView)
-            cell.textLabel!.text = "Date:"
-            cell.detailTextLabel?.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
+            let cell = ExpandableDatePickerSelectionCell.reusableCell(for: indexPath, in: tableView)
+            cell.detailTextLabel!.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
 
             return cell
         }

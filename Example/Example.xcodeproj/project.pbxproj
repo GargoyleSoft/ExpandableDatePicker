@@ -12,7 +12,6 @@
 		D2A414D01DF4005A00A72640 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A414CE1DF4005A00A72640 /* Main.storyboard */; };
 		D2A414D21DF4005A00A72640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A414D11DF4005A00A72640 /* Assets.xcassets */; };
 		D2A414D51DF4005A00A72640 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A414D31DF4005A00A72640 /* LaunchScreen.storyboard */; };
-		D2A414DD1DF4009F00A72640 /* DateDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A414DC1DF4009F00A72640 /* DateDisplayCell.swift */; };
 		D2A414E01DF400F200A72640 /* ExpandableDatePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A414DF1DF400F200A72640 /* ExpandableDatePicker.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		D2A414D11DF4005A00A72640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A414D41DF4005A00A72640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2A414D61DF4005A00A72640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2A414DC1DF4009F00A72640 /* DateDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateDisplayCell.swift; sourceTree = "<group>"; };
 		D2A414DF1DF400F200A72640 /* ExpandableDatePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExpandableDatePicker.framework; path = "../../../Library/Developer/Xcode/DerivedData/ExpandableDatePicker-hcocleewzqapimaqevpvupwxslod/Build/Products/Debug-iphonesimulator/ExpandableDatePicker.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				D2A414CA1DF4005A00A72640 /* AppDelegate.swift */,
-				D2A414DC1DF4009F00A72640 /* DateDisplayCell.swift */,
 				D2A414CC1DF4005A00A72640 /* ViewController.swift */,
 				D2A414CE1DF4005A00A72640 /* Main.storyboard */,
 				D2A414D11DF4005A00A72640 /* Assets.xcassets */,
@@ -153,7 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A414CD1DF4005A00A72640 /* ViewController.swift in Sources */,
-				D2A414DD1DF4009F00A72640 /* DateDisplayCell.swift in Sources */,
 				D2A414CB1DF4005A00A72640 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +312,7 @@
 				D2A414DB1DF4005A00A72640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

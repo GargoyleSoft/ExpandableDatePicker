@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D265C1E91DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */; };
 		D2A414681DF39B3D00A72640 /* ExpandableDatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2A414731DF39B4F00A72640 /* ExpandableDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4146E1DF39B4F00A72640 /* ExpandableDatePicker.swift */; };
 		D2A414741DF39B4F00A72640 /* ExpandableDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4146F1DF39B4F00A72640 /* ExpandableDatePickerCell.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerSelectionCell.swift; sourceTree = "<group>"; };
 		D2A414631DF39B3D00A72640 /* ExpandableDatePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableDatePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableDatePicker.h; sourceTree = "<group>"; };
 		D2A414671DF39B3D00A72640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */,
 				D2A414671DF39B3D00A72640 /* Info.plist */,
 				D2A414721DF39B4F00A72640 /* NSIndexPath.swift */,
+				D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */,
 			);
 			path = ExpandableDatePicker;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D265C1E91DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift in Sources */,
 				D2A414731DF39B4F00A72640 /* ExpandableDatePicker.swift in Sources */,
 				D2A414741DF39B4F00A72640 /* ExpandableDatePickerCell.swift in Sources */,
 				D2A414761DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift in Sources */,

@@ -4,7 +4,8 @@ ExpandableDatePicker is a library written in Swift which makes the display of a 
 a table row to select the TimeZone that should be used with the date, which is especially helpful when creating calendar items.
 
 For the cell you want to click on that causes the two new rows to appear and disappear you simply need to add the ShowsDatePicker protocol.
-There is nothing to implement from that protocol, it just needs to exist on the UITableViewCell subclass.
+There is nothing to implement from that protocol, it just needs to exist on the UITableViewCell subclass.  If you just want a simple "Right Detail" 
+cell you can use the provided ExpandableDatePickerSelectionCell class.
 
 You can use the below class as your starting point as it implements all the pieces required by the protocol.
 
@@ -51,11 +52,9 @@ extension ViewController {
 
         let modelIndexPath = updatedModelIndexPath(for: indexPath)
 
-        if modelIndexPath.row == rowThatTogglesDatePicker {
-            // DateDisplayCell is a custom UITableViewCell that implements the ShowsDatePicker protocol.  See the Example project
-            let cell = DateDisplayCell.reusableCell(for: indexPath, in: tableView)
-            cell.textLabel!.text = "Date:"
-            cell.detailTextLabel?.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
+        if modelIndexPath.row == rowThatExpandsToDatePicker {
+            let cell = ExpandableDatePickerSelectionCell.reusableCell(for: indexPath, in: tableView)
+            cell.detailTextLabel!.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
 
             return cell
         }

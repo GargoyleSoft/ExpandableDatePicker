@@ -43,13 +43,15 @@ public extension ExpandableDatePicker {
         return datePickerIndexPath != nil
     }
 
-    /// Sets up the `tableView` to support the two table cells.  Also sets the `estimatedRowHeight`
+    /// Sets up the `tableView` to support the required table cells.  Also sets the `estimatedRowHeight`
     /// to 44 as the date picker needs expandable cells.  You should call this from `viewDidLoad`
     ///
     /// - Parameter tableView: The `UITableView` to register the cells against.
     public static func setup(_ tableView: UITableView) {
         tableView.register(ExpandableDatePickerCell.self, forCellReuseIdentifier: ExpandableDatePickerCell.identifier)
         tableView.register(ExpandableDatePickerTimeZoneCell.self, forCellReuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
+        tableView.register(ExpandableDatePickerSelectionCell.self, forCellReuseIdentifier: ExpandableDatePickerSelectionCell.identifier)
+
         tableView.estimatedRowHeight = 44.0
     }
 
