@@ -69,11 +69,11 @@
 				D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */,
 				D2A4146E1DF39B4F00A72640 /* ExpandableDatePicker.swift */,
 				D2A4146F1DF39B4F00A72640 /* ExpandableDatePickerCell.swift */,
+				D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */,
 				D2A414701DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift */,
 				D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */,
 				D2A414671DF39B3D00A72640 /* Info.plist */,
 				D2A414721DF39B4F00A72640 /* NSIndexPath.swift */,
-				D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */,
 			);
 			path = ExpandableDatePicker;
 			sourceTree = "<group>";
