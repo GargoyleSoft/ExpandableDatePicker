@@ -25,6 +25,8 @@ import UIKit
 import ExpandableDatePicker
 
 class ViewController: UITableViewController, ExpandableDatePicker {
+    var showTimeZoneRow = true
+
     fileprivate let tableData = ["One", "Two", "Three", "Four"]
     fileprivate let rowThatExpandsToDatePicker = 2
 
@@ -75,8 +77,7 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rows = tableData.count
-        return showingInlineDatePicker ? rows + 2 : rows
+        return tableData.count + datePickerRowsShowing
     }
 }
 

@@ -35,12 +35,20 @@ public protocol ShowsDatePicker: class { }
 public protocol ExpandableDatePicker: class {
     var datePickerIndexPath: IndexPath? { get set }
     var tableView: UITableView! { get set }
+    var showTimeZoneRow: Bool { get set }
 }
 
 public extension ExpandableDatePicker {
     /// Determines whether or not an inline date picker is currently showing.
     public var showingInlineDatePicker: Bool {
         return datePickerIndexPath != nil
+    }
+
+    /// Returns the number of rows which need to be added to the table view's row count.
+    public var datePickerRowsShowing: Int {
+        guard showingInlineDatePicker else { return 0 }
+
+        return showTimeZoneRow ? 2 : 1
     }
 
     /// Sets up the `tableView` to support the required table cells.  Also sets the `estimatedRowHeight`
@@ -73,7 +81,7 @@ public extension ExpandableDatePicker {
         // If the date picker is in a row above or the same as our current row, then all subsequent rows would
         // have to have their row upped by 2, meaning we have to reduce the model's row by 2 to acocunt for that.
         if datePickerIndexPath.row <= indexPath.row {
-            row -= 2
+            row -= showTimeZoneRow ? 2 : 1
         }
 
         return IndexPath(row: row, section: indexPath.section)
@@ -103,6 +111,8 @@ public extension ExpandableDatePicker {
     /// work as you don't really have a model row for the timezone row.
     ///
     /// - Parameter indexPath: The `IndexPath` provided by the `UITableViewDataSource` or `UITableViewDelegate`
+    /// 
+    /// - Note: Always returns `false` if `showTimeZoneRow` is false
     ///
     /// - Returns: `true` or `false`
     ///
@@ -114,7 +124,7 @@ public extension ExpandableDatePicker {
     ///        return ExpandableDatePickerTimeZoneCell.reusableCell(for: indexPath, in: tableView)
     ///    }
     public func shouldShowTimeZoneRow(at indexPath: IndexPath) -> Bool {
-        return datePickerIndexPath?.nextRow() == indexPath
+        return showTimeZoneRow && datePickerIndexPath?.nextRow() == indexPath
     }
 
     /// This method should be called whenever a row in the `UITableView` has been selected.  This will control
@@ -149,11 +159,17 @@ public extension ExpandableDatePicker {
 
         // TODO: What happens when the sections are different.
         if let datePickerIndexPath = datePickerIndexPath {
-            let timeZoneIndexPath = datePickerIndexPath.nextRow()
+            var indexesToDelete = [datePickerIndexPath]
 
-            if timeZoneIndexPath == indexPath {
-                // They selected the timezone row.   
-                return nil
+            if showTimeZoneRow {
+                let timeZoneIndexPath = datePickerIndexPath.nextRow()
+
+                if timeZoneIndexPath == indexPath {
+                    // They selected the timezone row.
+                    return nil
+                }
+
+                indexesToDelete.append(timeZoneIndexPath)
             }
 
             if datePickerIndexPath.row < indexPath.row {
@@ -161,7 +177,7 @@ public extension ExpandableDatePicker {
             }
 
             // Get rid of the currently visible inline date picker
-            tableView.deleteRows(at: [datePickerIndexPath, timeZoneIndexPath], with: .automatic)
+            tableView.deleteRows(at: indexesToDelete, with: .automatic)
 
             let previousControlCellRow = datePickerIndexPath.row - 1
 
@@ -179,7 +195,12 @@ public extension ExpandableDatePicker {
 
         // They tapped a different row that also wants to show a date picker, so insert it now.
         let indexPathToReveal = updatedIndexPath.nextRow()
-        tableView.insertRows(at: [indexPathToReveal, indexPathToReveal.nextRow()], with: .automatic)
+        var indexesToAdd = [indexPathToReveal]
+        if showTimeZoneRow {
+            indexesToAdd.append(indexPathToReveal.nextRow())
+        }
+
+        tableView.insertRows(at: indexesToAdd, with: .automatic)
         datePickerIndexPath = indexPathToReveal
 
         return updatedIndexPath

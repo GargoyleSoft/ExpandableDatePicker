@@ -18,6 +18,9 @@ class ViewController: UITableViewController, ExpandableDatePicker {
     // Not used directly by you, but is part of the protocol so the framework can use it.
     var datePickerIndexPath: IndexPath?
 
+    // Whether or not the expansion should include a TimeZone row selector.
+    var showTimeZoneRow = true
+
     fileprivate var rowThatTogglesDatePicker: Int!
 
     fileprivate var selectedDate = Date()
@@ -65,8 +68,7 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rows = tableData.count
-        return showingInlineDatePicker ? rows + 2 : rows
+        return tableData.count + datePickerRowsShowing
     }
 }
 

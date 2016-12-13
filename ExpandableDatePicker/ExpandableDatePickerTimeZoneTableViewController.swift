@@ -25,7 +25,7 @@ import UIKit
 
 fileprivate let identifier = "E8C5B426-A9F6-4EEA-B080-601C5892C38D"
 
-internal class ExpandableDatePickerTimeZoneCellData {
+fileprivate class ExpandableDatePickerTimeZoneCellData {
     let name: String
     let fullName: String?
     let indentationLevel: Int
