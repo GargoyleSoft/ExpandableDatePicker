@@ -34,6 +34,7 @@ internal class LongTimeZoneDelegate: NSObject {
 
     fileprivate var tableData: [LongTimeZoneCellData] = []
     fileprivate var nodes: [LongTimeZoneCellData] = []
+    fileprivate var filteredTableData: [String] = []
 
     init(tableView: UITableView, searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
         self.searchController = searchController
@@ -97,21 +98,27 @@ internal class LongTimeZoneDelegate: NSObject {
 // MARK: - UITableViewDataSource
 extension LongTimeZoneDelegate: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+        return searchController.isActive ? filteredTableData.count : tableData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableData[indexPath.row]
-
         let cell = tableView.dequeueReusableCell(withIdentifier: LongTimeZoneDelegate.identifier, for: indexPath)
-        cell.indentationLevel = data.indentationLevel
 
-        if data.children == nil {
-            cell.textLabel?.text = data.name
-        } else if data.isExpanded {
-            cell.textLabel!.text = "➖ \(data.name)"
+        if searchController.isActive {
+            cell.indentationLevel = 0
+            cell.textLabel!.text = filteredTableData[indexPath.row]
         } else {
-            cell.textLabel!.text = "➕ \(data.name)"
+            let data = tableData[indexPath.row]
+
+            cell.indentationLevel = data.indentationLevel
+
+            if data.children == nil {
+                cell.textLabel!.text = data.name
+            } else if data.isExpanded {
+                cell.textLabel!.text = "➖ \(data.name)"
+            } else {
+                cell.textLabel!.text = "➕ \(data.name)"
+            }
         }
 
         return cell
@@ -121,6 +128,16 @@ extension LongTimeZoneDelegate: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension LongTimeZoneDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searchController.isActive {
+            let identifier = filteredTableData[indexPath.row]
+            let tz = TimeZone(identifier: identifier)!
+            onChosen(tz)
+
+            _ = navigationController?.popViewController(animated: true)
+
+            return
+        }
+
         let data = tableData[indexPath.row]
 
         if let children = data.children {
@@ -169,7 +186,7 @@ extension LongTimeZoneDelegate: UITableViewDelegate {
                 data.isExpanded = true
             }
         } else {
-            let tz = TimeZone(identifier: data.fullName!)!
+            let tz = TimeZone(identifier: data.fullName)!
             
             onChosen(tz)
             
@@ -182,6 +199,15 @@ extension LongTimeZoneDelegate: UITableViewDelegate {
 // MARK: - UISearchResultsUpdating
 extension LongTimeZoneDelegate : UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
+        defer { tableView.reloadData() }
 
+        let all = TimeZone.knownTimeZoneIdentifiers
+
+        guard let text = searchController.searchBar.text?.localizedLowercase, !text.isEmpty else {
+            filteredTableData = all
+            return
+        }
+
+        filteredTableData = all.filter { $0.localizedStandardContains(text) }
     }
 }

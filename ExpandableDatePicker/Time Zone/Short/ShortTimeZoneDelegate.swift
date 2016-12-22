@@ -24,22 +24,6 @@
 
 import UIKit
 
-internal class ShortTimeZoneCellData: NSObject {
-    let abbrev: String
-    let full: String
-
-    init(abbrev: String, full: String) {
-        self.abbrev = abbrev
-        self.full = full
-
-        super.init()
-    }
-
-    func displayName() -> String {
-        return "\(abbrev) (\(full))"
-    }
-}
-
 internal class ShortTimeZoneDelegate: NSObject {
     static let identifier = "FBD2F386-DB78-4A4C-8EEE-C2232E6AE50A"
 
@@ -159,11 +143,13 @@ extension ShortTimeZoneDelegate : UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
         defer { tableView.reloadData() }
 
-        guard let text = searchController.searchBar.text?.localizedLowercase, !text.isEmpty else {
-            filteredTableData = tableData.flatMap { $0 }
+        let all = tableData.flatMap { $0 }
+
+        guard let text = searchController.searchBar.text, !text.isEmpty else {
+            filteredTableData = all
             return
         }
 
-        filteredTableData = tableData.flatMap { $0 }.filter { $0.abbrev.localizedLowercase.contains(text) }
+        filteredTableData = all.filter { $0.abbrev.localizedStandardContains(text) }
     }
 }

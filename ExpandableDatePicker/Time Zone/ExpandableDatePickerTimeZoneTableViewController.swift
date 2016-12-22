@@ -50,8 +50,6 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
 
         navigationItem.titleView = segment
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: LongTimeZoneDelegate.identifier)
-
         searchController.dimsBackgroundDuringPresentation = false
 
         definesPresentationContext = true

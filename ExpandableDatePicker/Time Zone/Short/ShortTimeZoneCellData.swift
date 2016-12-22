@@ -1,6 +1,5 @@
 //
-//  LongTimeZoneCellData.swift
-//
+//  ShortTimeZoneCellData.swift
 //  Copyright © 2016 Gargoyle Software, LLC
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,16 +23,18 @@
 
 import Foundation
 
-internal class LongTimeZoneCellData {
-    let name: String
-    let fullName: String
-    let indentationLevel: Int
-    var isExpanded = false
-    var children: [LongTimeZoneCellData]?
+internal class ShortTimeZoneCellData: NSObject {
+    let abbrev: String
+    let full: String
 
-    init(name: String, indentationLevel: Int, fullName: String) {
-        self.name = name
-        self.fullName = fullName
-        self.indentationLevel = indentationLevel
+    init(abbrev: String, full: String) {
+        self.abbrev = abbrev
+        self.full = full
+
+        super.init()
+    }
+
+    func displayName() -> String {
+        return "\(abbrev) (\(full))"
     }
 }
