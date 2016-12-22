@@ -24,42 +24,129 @@
 
 import UIKit
 
+internal class ShortTimeZoneCellData: NSObject {
+    let abbrev: String
+    let full: String
+
+    init(abbrev: String, full: String) {
+        self.abbrev = abbrev
+        self.full = full
+
+        super.init()
+    }
+
+    func displayName() -> String {
+        return "\(abbrev) (\(full))"
+    }
+}
+
 internal class ShortTimeZoneDelegate: NSObject {
     static let identifier = "FBD2F386-DB78-4A4C-8EEE-C2232E6AE50A"
 
     fileprivate let searchController: UISearchController
     fileprivate let onChosen: (TimeZone) -> Void
     fileprivate let navigationController: UINavigationController?
+    fileprivate let collation = UILocalizedIndexedCollation.current()
+    fileprivate let tableView: UITableView
 
-    fileprivate var tableData = TimeZone.abbreviationDictionary.keys.sorted()
+    fileprivate var tableData: [[ShortTimeZoneCellData]]!
+    fileprivate var filteredTableData: [ShortTimeZoneCellData] = []
 
-    init(searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
+    var sectionTitles: [String] = []
+    var sectionTitleToSectionNumber: [String : Int] = [:]
+
+    init(tableView: UITableView, searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
         self.searchController = searchController
         self.onChosen = onChosen
         self.navigationController = navigationController
+        self.tableView = tableView
 
         super.init()
+
+        buildTableData()
+    }
+
+    private func buildTableData() {
+        let dict = TimeZone.abbreviationDictionary
+
+        // First we have to put everything into the proper section
+        var sections = [[ShortTimeZoneCellData]](repeating: [], count: collation.sectionTitles.count)
+
+        for abbrev in dict.keys.sorted() {
+            let data = ShortTimeZoneCellData(abbrev: abbrev, full: dict[abbrev]!)
+
+            let sectionNumber = collation.section(for: data, collationStringSelector: #selector(ShortTimeZoneCellData.displayName))
+
+            sections[sectionNumber].append(data)
+        }
+
+        // Then we want to go through and only keep sections that have items.  To do that we have
+        // to have a "section title to new section index" value stored.
+        var sectionsWithData: [[ShortTimeZoneCellData]] = []
+
+        for (sectionNumber, sections) in sections.enumerated() {
+            let title = collation.sectionTitles[sectionNumber]
+
+            if sections.isEmpty == false {
+                sectionTitles.append(title)
+                sectionsWithData.append(sections)
+            }
+
+            sectionTitleToSectionNumber[title] = max(sectionsWithData.count - 1, 0)
+        }
+
+        tableData = sectionsWithData
+    }
+
+    fileprivate var usingSearch: Bool {
+        return searchController.isActive
     }
 }
 
 // MARK: - UITableViewDataSource
 extension ShortTimeZoneDelegate: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return usingSearch ? 1 : tableData.count
+    }
+
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return usingSearch ? nil : [UITableViewIndexSearch] + collation.sectionIndexTitles
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ShortTimeZoneDelegate.identifier, for: indexPath)
-        cell.textLabel!.text = tableData[indexPath.row]
+
+        let data = usingSearch ? filteredTableData[indexPath.row] : tableData[indexPath.section][indexPath.row]
+        cell.textLabel!.text = data.displayName()
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return usingSearch ? filteredTableData.count : tableData[section].count
+    }
+
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        if index == 0 {
+            let searchBarFrame = searchController.searchBar.frame
+            tableView.scrollRectToVisible(searchBarFrame, animated: true)
+
+            return NSNotFound
+        }
+
+        return sectionTitleToSectionNumber[title]!
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return usingSearch ? nil : sectionTitles[section]
     }
 }
 
 // MARK: - UITableViewDelegate
 extension ShortTimeZoneDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let tz = TimeZone(abbreviation: tableData[indexPath.row])!
+        let data = usingSearch ? filteredTableData[indexPath.row] : tableData[indexPath.section][indexPath.row]
+        let tz = TimeZone(abbreviation: data.abbrev)!
 
         onChosen(tz)
 
@@ -67,10 +154,16 @@ extension ShortTimeZoneDelegate: UITableViewDelegate {
     }
 }
 
-
 // MARK: - UISearchResultsUpdating
 extension ShortTimeZoneDelegate : UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
+        defer { tableView.reloadData() }
 
+        guard let text = searchController.searchBar.text?.localizedLowercase, !text.isEmpty else {
+            filteredTableData = tableData.flatMap { $0 }
+            return
+        }
+
+        filteredTableData = tableData.flatMap { $0 }.filter { $0.abbrev.localizedLowercase.contains(text) }
     }
 }

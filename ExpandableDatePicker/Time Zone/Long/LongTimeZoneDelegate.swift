@@ -30,13 +30,16 @@ internal class LongTimeZoneDelegate: NSObject {
     fileprivate let searchController: UISearchController
     fileprivate let onChosen: (TimeZone) -> Void
     fileprivate let navigationController: UINavigationController?
+    fileprivate let tableView: UITableView
+
     fileprivate var tableData: [LongTimeZoneCellData] = []
     fileprivate var nodes: [LongTimeZoneCellData] = []
 
-    init(searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
+    init(tableView: UITableView, searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
         self.searchController = searchController
         self.onChosen = onChosen
         self.navigationController = navigationController
+        self.tableView = tableView
 
         super.init()
 

@@ -25,7 +25,8 @@
 import UIKit
 
 public class ExpandableDatePickerTimeZoneTableViewController : UITableViewController {
-    fileprivate var onChosen: ((TimeZone) -> Void)!
+    fileprivate let onChosen: (TimeZone) -> Void
+
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var longTimeZoneDelegate: LongTimeZoneDelegate?
     fileprivate var shortTimeZoneDelegate: ShortTimeZoneDelegate?
@@ -57,10 +58,6 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
 
         tableView.tableHeaderView = searchController.searchBar
 
-        longTimeZoneDelegate = LongTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
-        tableView.dataSource = longTimeZoneDelegate
-        tableView.delegate = longTimeZoneDelegate
-
         perform(#selector(segmentValueChanged(segment:)), with: segment)
     }
 
@@ -72,7 +69,7 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         if segment.selectedSegmentIndex == 0 {
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: LongTimeZoneDelegate.identifier)
 
-            longTimeZoneDelegate = LongTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
+            longTimeZoneDelegate = LongTimeZoneDelegate(tableView: tableView, searchController: searchController, navigationController: navigationController, onChosen: onChosen)
             tableView.dataSource = longTimeZoneDelegate
             tableView.delegate = longTimeZoneDelegate
             searchController.searchResultsUpdater = longTimeZoneDelegate
@@ -81,7 +78,7 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         } else {
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: ShortTimeZoneDelegate.identifier)
 
-            shortTimeZoneDelegate = ShortTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
+            shortTimeZoneDelegate = ShortTimeZoneDelegate(tableView: tableView, searchController: searchController, navigationController: navigationController, onChosen: onChosen)
             tableView.dataSource = shortTimeZoneDelegate
             tableView.delegate = shortTimeZoneDelegate
             searchController.searchResultsUpdater = shortTimeZoneDelegate
@@ -90,6 +87,9 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         }
 
         tableView.reloadData()
+
+        let searchBarFrame = searchController.searchBar.frame
+        tableView.scrollRectToVisible(searchBarFrame, animated: false)
     }
 }
 
