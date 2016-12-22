@@ -23,6 +23,8 @@
 
 import UIKit
 
+/// A custom `UITableViewCell` which is used to show the row which expands into a 
+/// `UIDatePicker` and time zone selection cell.
 open class ExpandableDatePickerSelectionCell : UITableViewCell, ShowsDatePicker {
     public static let identifier = "0DB89E55-CAB1-4EFB-8D47-01C86D52B106"
 
@@ -36,6 +38,12 @@ open class ExpandableDatePickerSelectionCell : UITableViewCell, ShowsDatePicker 
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Returns a reusable cell to display the time zone picker row.
+    ///
+    /// - Parameters:
+    ///   - indexPath: The `IndexPath` where the cell will be displayed.
+    ///   - tableView: The `UITableView` being used.
+    /// - Returns: An `ExpandableDatePickerSelectionCell`
     open class func reusableCell(for indexPath: IndexPath, in tableView: UITableView) -> ExpandableDatePickerSelectionCell {
         return tableView.dequeueReusableCell(withIdentifier: ExpandableDatePickerSelectionCell.identifier, for: indexPath) as! ExpandableDatePickerSelectionCell
     }

@@ -24,6 +24,7 @@
 
 import UIKit
 
+/// A custom `UITableViewCell` which is used to show the currently selected time zone.
 open class ExpandableDatePickerTimeZoneCell : UITableViewCell {
     public static let identifier = "FE12D1A9-0CC5-46BD-9BAB-81FCDA1ED7DD"
 
@@ -39,6 +40,13 @@ open class ExpandableDatePickerTimeZoneCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Returns a reusable cell to display the time zone picker row.
+    ///
+    /// - Parameters:
+    ///   - indexPath: The `IndexPath` where the cell will be displayed.
+    ///   - tableView: The `UITableView` being used.
+    ///   - timeZone: The `TimeZone` which is currently selected.
+    /// - Returns: An `ExpandableDatePickerTimeZoneCell`
     open class func reusableCell(for indexPath: IndexPath, in tableView: UITableView, timeZone: TimeZone = NSTimeZone.local) -> ExpandableDatePickerTimeZoneCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExpandableDatePickerTimeZoneCell.identifier, for: indexPath) as! ExpandableDatePickerTimeZoneCell
 

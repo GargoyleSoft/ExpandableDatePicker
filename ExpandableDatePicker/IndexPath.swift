@@ -1,5 +1,5 @@
 //
-//  IndexPath.swift
+//   IndexPath.swift
 //
 //  Copyright © 2016 Gargoyle Software, LLC
 //

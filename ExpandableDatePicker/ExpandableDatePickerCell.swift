@@ -23,6 +23,7 @@
 
 import UIKit
 
+/// A custom `UITableViewCell` which is used to show the `UIDatePicker`
 open class ExpandableDatePickerCell : UITableViewCell {
     public static let identifier = "1D72FAC3-6D57-4D57-AF49-386E37BF0089"
 
@@ -57,6 +58,12 @@ open class ExpandableDatePickerCell : UITableViewCell {
         onDateChanged(sender.date)
     }
 
+    /// Returns a reusable cell to display the date picker.
+    ///
+    /// - Parameters:
+    ///   - indexPath: The `IndexPath` where the cell will be displayed.
+    ///   - tableView: The `UITableView` being used.
+    /// - Returns: An `ExpandableDatePickerCell`
     open class func reusableCell(for indexPath: IndexPath, in tableView: UITableView) -> ExpandableDatePickerCell {
         return tableView.dequeueReusableCell(withIdentifier: ExpandableDatePickerCell.identifier, for: indexPath) as! ExpandableDatePickerCell
     }

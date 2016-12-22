@@ -24,6 +24,9 @@
 
 import UIKit
 
+/// A `UITableViewController` which allows selection of a time zone based on either
+/// an abbreviated name (e.g. PST) or a full name (e.g. America/Los_Angeles).  Supports
+/// searching.
 public class ExpandableDatePickerTimeZoneTableViewController : UITableViewController {
     fileprivate let onChosen: (TimeZone) -> Void
 
