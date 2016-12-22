@@ -28,6 +28,7 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
     fileprivate var onChosen: ((TimeZone) -> Void)!
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var longTimeZoneDelegate: LongTimeZoneDelegate?
+    fileprivate var shortTimeZoneDelegate: ShortTimeZoneDelegate?
 
     public init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
         self.onChosen = onTimeZoneChosen
@@ -44,12 +45,12 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
             ])
         segment.sizeToFit()
         segment.selectedSegmentIndex = 0
+        segment.addTarget(self, action: #selector(segmentValueChanged(segment:)), for: .valueChanged)
 
         navigationItem.titleView = segment
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: LongTimeZoneDelegate.identifier)
 
-        searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
 
         definesPresentationContext = true
@@ -59,16 +60,36 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         longTimeZoneDelegate = LongTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
         tableView.dataSource = longTimeZoneDelegate
         tableView.delegate = longTimeZoneDelegate
+
+        perform(#selector(segmentValueChanged(segment:)), with: segment)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
 
-// MARK: - UISearchResultsUpdating
-extension ExpandableDatePickerTimeZoneTableViewController : UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
+    @objc private func segmentValueChanged(segment: UISegmentedControl) {
+        if segment.selectedSegmentIndex == 0 {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: LongTimeZoneDelegate.identifier)
 
+            longTimeZoneDelegate = LongTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
+            tableView.dataSource = longTimeZoneDelegate
+            tableView.delegate = longTimeZoneDelegate
+            searchController.searchResultsUpdater = longTimeZoneDelegate
+
+            shortTimeZoneDelegate = nil
+        } else {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: ShortTimeZoneDelegate.identifier)
+
+            shortTimeZoneDelegate = ShortTimeZoneDelegate(searchController: searchController, navigationController: navigationController, onChosen: onChosen)
+            tableView.dataSource = shortTimeZoneDelegate
+            tableView.delegate = shortTimeZoneDelegate
+            searchController.searchResultsUpdater = shortTimeZoneDelegate
+
+            longTimeZoneDelegate = nil
+        }
+
+        tableView.reloadData()
     }
 }
+

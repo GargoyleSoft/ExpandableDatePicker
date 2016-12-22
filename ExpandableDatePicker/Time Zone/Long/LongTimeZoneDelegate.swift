@@ -118,8 +118,6 @@ extension LongTimeZoneDelegate: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension LongTimeZoneDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        precondition(onChosen != nil, "Must specify the onChosen block.")
-
         let data = tableData[indexPath.row]
 
         if let children = data.children {
@@ -174,5 +172,13 @@ extension LongTimeZoneDelegate: UITableViewDelegate {
             
             _ = navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+
+// MARK: - UISearchResultsUpdating
+extension LongTimeZoneDelegate : UISearchResultsUpdating {
+    public func updateSearchResults(for searchController: UISearchController) {
+
     }
 }
