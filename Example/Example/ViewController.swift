@@ -38,9 +38,7 @@ class ViewController: UITableViewController, ExpandableDatePicker {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Comes from ExpandableDatePicker but you can't directly call a static method via a protocol
-        // so we have to use our own class name.
-        ViewController.setup(tableView)
+        tableView.registerExpandableDatePicker()
     }
 }
 
