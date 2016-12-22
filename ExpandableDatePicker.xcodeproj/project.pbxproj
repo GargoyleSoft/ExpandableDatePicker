@@ -9,24 +9,28 @@
 /* Begin PBXBuildFile section */
 		D265C1E91DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */; };
 		D2728BF51E0B2B3700BADCD5 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2728BF41E0B2B3700BADCD5 /* UITableView.swift */; };
+		D2728BFB1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2728BF91E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneCell.swift */; };
+		D2728BFC1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2728BFA1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneTableViewController.swift */; };
+		D2728C081E0C47D000BADCD5 /* LongTimeZoneCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2728C061E0C47D000BADCD5 /* LongTimeZoneCellData.swift */; };
+		D2728C0A1E0C480C00BADCD5 /* LongTimeZoneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2728C091E0C480C00BADCD5 /* LongTimeZoneDelegate.swift */; };
 		D2A414681DF39B3D00A72640 /* ExpandableDatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2A414731DF39B4F00A72640 /* ExpandableDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4146E1DF39B4F00A72640 /* ExpandableDatePicker.swift */; };
 		D2A414741DF39B4F00A72640 /* ExpandableDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4146F1DF39B4F00A72640 /* ExpandableDatePickerCell.swift */; };
-		D2A414751DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A414701DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift */; };
-		D2A414761DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */; };
 		D2A414771DF39B4F00A72640 /* IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A414721DF39B4F00A72640 /* IndexPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerSelectionCell.swift; sourceTree = "<group>"; };
 		D2728BF41E0B2B3700BADCD5 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		D2728BF91E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneCell.swift; sourceTree = "<group>"; };
+		D2728BFA1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneTableViewController.swift; sourceTree = "<group>"; };
+		D2728C061E0C47D000BADCD5 /* LongTimeZoneCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongTimeZoneCellData.swift; sourceTree = "<group>"; };
+		D2728C091E0C480C00BADCD5 /* LongTimeZoneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongTimeZoneDelegate.swift; sourceTree = "<group>"; };
 		D2A414631DF39B3D00A72640 /* ExpandableDatePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableDatePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableDatePicker.h; sourceTree = "<group>"; };
 		D2A414671DF39B3D00A72640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2A4146E1DF39B4F00A72640 /* ExpandableDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePicker.swift; sourceTree = "<group>"; };
 		D2A4146F1DF39B4F00A72640 /* ExpandableDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerCell.swift; sourceTree = "<group>"; };
-		D2A414701DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneCell.swift; sourceTree = "<group>"; };
-		D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDatePickerTimeZoneTableViewController.swift; sourceTree = "<group>"; };
 		D2A414721DF39B4F00A72640 /* IndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,6 +50,33 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2728BF81E0C42C100BADCD5 /* Time Zone */ = {
+			isa = PBXGroup;
+			children = (
+				D2728C051E0C47D000BADCD5 /* Long */,
+				D2728C071E0C47D000BADCD5 /* Short */,
+				D2728BF91E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneCell.swift */,
+				D2728BFA1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneTableViewController.swift */,
+			);
+			path = "Time Zone";
+			sourceTree = "<group>";
+		};
+		D2728C051E0C47D000BADCD5 /* Long */ = {
+			isa = PBXGroup;
+			children = (
+				D2728C061E0C47D000BADCD5 /* LongTimeZoneCellData.swift */,
+				D2728C091E0C480C00BADCD5 /* LongTimeZoneDelegate.swift */,
+			);
+			path = Long;
+			sourceTree = "<group>";
+		};
+		D2728C071E0C47D000BADCD5 /* Short */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Short;
 			sourceTree = "<group>";
 		};
 		D2A414591DF39B3D00A72640 = {
@@ -68,12 +99,11 @@
 		D2A414651DF39B3D00A72640 /* ExpandableDatePicker */ = {
 			isa = PBXGroup;
 			children = (
+				D2728BF81E0C42C100BADCD5 /* Time Zone */,
 				D2A414661DF39B3D00A72640 /* ExpandableDatePicker.h */,
 				D2A4146E1DF39B4F00A72640 /* ExpandableDatePicker.swift */,
 				D2A4146F1DF39B4F00A72640 /* ExpandableDatePickerCell.swift */,
 				D265C1E81DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift */,
-				D2A414701DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift */,
-				D2A414711DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift */,
 				D2A414721DF39B4F00A72640 /* IndexPath.swift */,
 				D2A414671DF39B3D00A72640 /* Info.plist */,
 				D2728BF41E0B2B3700BADCD5 /* UITableView.swift */,
@@ -164,12 +194,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D265C1E91DF688BD005B95B1 /* ExpandableDatePickerSelectionCell.swift in Sources */,
+				D2728C081E0C47D000BADCD5 /* LongTimeZoneCellData.swift in Sources */,
 				D2A414731DF39B4F00A72640 /* ExpandableDatePicker.swift in Sources */,
+				D2728BFB1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneCell.swift in Sources */,
+				D2728C0A1E0C480C00BADCD5 /* LongTimeZoneDelegate.swift in Sources */,
 				D2A414741DF39B4F00A72640 /* ExpandableDatePickerCell.swift in Sources */,
-				D2A414761DF39B4F00A72640 /* ExpandableDatePickerTimeZoneTableViewController.swift in Sources */,
-				D2A414751DF39B4F00A72640 /* ExpandableDatePickerTimeZoneCell.swift in Sources */,
 				D2A414771DF39B4F00A72640 /* IndexPath.swift in Sources */,
 				D2728BF51E0B2B3700BADCD5 /* UITableView.swift in Sources */,
+				D2728BFC1E0C42C100BADCD5 /* ExpandableDatePickerTimeZoneTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

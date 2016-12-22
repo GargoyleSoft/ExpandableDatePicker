@@ -1,5 +1,5 @@
 //
-//  ExpandableDatePickerTimeZoneTableViewController.swift
+//  LongTimeZoneDelegate.swift
 //
 //  Copyright © 2016 Gargoyle Software, LLC
 //
@@ -20,55 +20,36 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
+//
 
 import UIKit
 
-fileprivate let identifier = "E8C5B426-A9F6-4EEA-B080-601C5892C38D"
+internal class LongTimeZoneDelegate: NSObject {
+    static let identifier = "E8C5B426-A9F6-4EEA-B080-601C5892C38D"
 
-fileprivate class ExpandableDatePickerTimeZoneCellData {
-    let name: String
-    let fullName: String?
-    let indentationLevel: Int
-    var isExpanded = false
-    var children: [ExpandableDatePickerTimeZoneCellData]?
+    fileprivate let searchController: UISearchController
+    fileprivate let onChosen: (TimeZone) -> Void
+    fileprivate let navigationController: UINavigationController?
+    fileprivate var tableData: [LongTimeZoneCellData] = []
+    fileprivate var nodes: [LongTimeZoneCellData] = []
 
-    init(name: String, indentationLevel: Int, fullName: String? = nil) {
-        self.name = name
-        self.fullName = fullName
-        self.indentationLevel = indentationLevel
-    }
-}
+    init(searchController: UISearchController, navigationController: UINavigationController?, onChosen: @escaping (TimeZone) -> Void) {
+        self.searchController = searchController
+        self.onChosen = onChosen
+        self.navigationController = navigationController
 
-open class ExpandableDatePickerTimeZoneTableViewController : UITableViewController {
-    fileprivate var onChosen: ((TimeZone) -> Void)!
-    fileprivate var tableData: [ExpandableDatePickerTimeZoneCellData] = []
-    fileprivate var nodes: [ExpandableDatePickerTimeZoneCellData] = []
-
-    public init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
-        self.onChosen = onTimeZoneChosen
-
-        super.init(style: .plain)
+        super.init()
 
         for name in TimeZone.knownTimeZoneIdentifiers {
             buildTimeZoneData(items: &nodes, fullName: name, parts: name.components(separatedBy: "/"), indentationLevel: 0)
         }
 
         for node in nodes {
-            tableData.append(node)
+            self.tableData.append(node)
         }
     }
 
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    fileprivate func collapseAndCount(_ data: ExpandableDatePickerTimeZoneCellData) -> Int {
+    fileprivate func collapseAndCount(_ data: LongTimeZoneCellData) -> Int {
         var count = 1
 
         guard data.isExpanded, let children = data.children else { return count }
@@ -82,7 +63,7 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
         return count
     }
 
-    private func buildTimeZoneData(items: inout [ExpandableDatePickerTimeZoneCellData], fullName: String, parts: [String], indentationLevel: Int) {
+    private func buildTimeZoneData(items: inout [LongTimeZoneCellData], fullName: String, parts: [String], indentationLevel: Int) {
         guard let name = parts.first else { return }
 
         let rest = parts[1..<parts.count]
@@ -92,7 +73,7 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
             guard rest.count > 0 else { return }
 
             if item.children == nil {
-                item.children = [ExpandableDatePickerTimeZoneCellData(name: name, indentationLevel: indentationLevel + 2, fullName: fullName)]
+                item.children = [LongTimeZoneCellData(name: name, indentationLevel: indentationLevel + 2, fullName: fullName)]
             }
 
             buildTimeZoneData(items: &item.children!, fullName: fullName, parts: rest + [], indentationLevel: indentationLevel + 2)
@@ -100,7 +81,7 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
             return
         }
 
-        let new = ExpandableDatePickerTimeZoneCellData(name: name, indentationLevel: indentationLevel, fullName: fullName)
+        let new = LongTimeZoneCellData(name: name, indentationLevel: indentationLevel, fullName: fullName)
         items.append(new)
 
         guard rest.count > 0 else { return }
@@ -108,16 +89,18 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
         new.children = []
         buildTimeZoneData(items: &new.children!, fullName: fullName, parts: rest + [], indentationLevel: indentationLevel + 2)
     }
+}
 
-    // MARK: - UITableViewDataSource
-    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - UITableViewDataSource
+extension LongTimeZoneDelegate: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
 
-    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: LongTimeZoneDelegate.identifier, for: indexPath)
         cell.indentationLevel = data.indentationLevel
 
         if data.children == nil {
@@ -130,8 +113,11 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
 
         return cell
     }
+}
 
-    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+// MARK: - UITableViewDelegate
+extension LongTimeZoneDelegate: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         precondition(onChosen != nil, "Must specify the onChosen block.")
 
         let data = tableData[indexPath.row]
@@ -177,7 +163,7 @@ open class ExpandableDatePickerTimeZoneTableViewController : UITableViewControll
                     indexPaths.append(ip)
                     tableData.insert(child, at: ip.row)
                 }
-                
+
                 tableView.insertRows(at: indexPaths, with: .automatic)
                 data.isExpanded = true
             }
