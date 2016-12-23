@@ -7,7 +7,7 @@ For the cell you want to click on that causes the two new rows to appear and dis
 There is nothing to implement from that protocol, it just needs to exist on the UITableViewCell subclass.  If you just want a simple "Right Detail" 
 cell you can use the provided ExpandableDatePickerSelectionCell class.
 
-![Demo](https://github.com/GargoyleSoft/ExpandableDatePicker/demo.gif "Demo")
+![Demo](https://github.com/GargoyleSoft/ExpandableDatePicker/blob/master/demo.gif "Demo")
 
 ## Adding To An Existing View Controller
 
