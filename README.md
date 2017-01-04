@@ -13,30 +13,27 @@ cell you can use the provided ExpandableDatePickerSelectionCell class.
 
 * Import the ExpandableDatePicker module
 * Add the ExpandableDatePicker protocol to your view controller
-* Add the three variables defined by the protocol
-* Replace all instances of *indexPath* in your *UITableViewDelegate* and *UITableViewDataSource* with *updatedModelIndexPath(for:)*
+* Add the three variables defined by the protocol (The tableView likely already exists...)
+* Replace all instances of *indexPath* in your *UITableViewDelegate* and *UITableViewDataSource* with *edpUpdatedModelIndexPath(for:)*
 
 ### viewDidLoad()
 
 Call *tableView.registerExpandableDatePicker()*.  This registers the cells used internally and **sets the *estimatedRowHeight* of the *UITableView* to 44.0** as the *UIDatePicker* requires expandable cells.
 
-### tableView(_:cellForRowAt:)
+### tableView(\_:cellForRowAt:)
  
-The very start of this method should check *shouldShowDatePicker(at:)* and *shouldShowTimeZoneRow(at:)* before doing anything else, and taking the appropriate action based on the return values.  See the example below for full details.
+The very start of this method should check *edpShouldShowDatePicker(at:)* and *edpShouldShowTimeZoneRow(at:)* before doing anything else, and taking the appropriate action based on the return values.  See the example below for full details.
 
 For the row which is supposed to return the current value of the date, and the one which is tapped on to expand into the date picker and time zone picker rows, you should return an *ExpandableDatePickerSelectionCell* unless you need something more custom.  Simply grab a reusable cell, set the *detailTextLabel* and return the cell.  See below for an example.
 
-### tableView(_:accessoryButtonTappedForRowWith:)
+### tableView(\_:accessoryButtonTappedForRowWith:) and tableView(\_:didSelectRowAt:)
 
-You'll might need to call *tableCellWasSelected(at:)* first and examine the output, depending on your usage model. If you've used the provided *ExpandableDatePickerSelectionCell* then there's no need to do this.
+You definitely need to call *edpTableCellWasSelected(at:)* first and examine the output.  You'll either get back *nil* or an updated *IndexPath* value.  If it's *nil* then they tapped on the row which is used to pick a time zone.  You simply push an *ExpandableDatePickerTimeZoneTableViewController* (whew!) onto your *UINavigationController*.  Your callback will be given a *TimeZone* object which you should store in your local data model and then update your *UITableView*
 
-### tableView(_:didSelectRowAt:)
+### tableView(\_:numberOfRowsInSection)
 
-You definitely need to call *tableCellWasSelected(at:)* first and examine the output.  You'll either get back *nil* or an updated *IndexPath* value.  If it's *nil* then they tapped on the row which is used to pick a time zone.  You simply push an *ExpandableDatePickerTimeZoneTableViewController* (whew!) onto your *UINavigationController*.  Your callback will be given a *TimeZone* object which you should store in your local data model and then update your *UITableView*
+Add *edpDatePickerRowsShowing* to your output.  This will either be 0, 1, or 2 depending on whether the extra rows are showing or not.
 
-### tableView(_:numberOfRowsInSection)
-
-Add *datePickerRowsShowing* to your output.  This will either be 0, 1, or 2 depending on whether the extra rows are showing or not.
 ## Example Implementation
 You can use the below class as your starting point as it implements all the pieces required by the protocol.
 
@@ -47,10 +44,10 @@ import ExpandableDatePicker
 
 class ViewController: UITableViewController, ExpandableDatePicker {
     // Not used directly by you, but is part of the protocol so the framework can use it.
-    var datePickerIndexPath: IndexPath?
+    var edpIndexPath: IndexPath?
 
     // Whether or not the expansion should include a TimeZone row selector.
-    var showTimeZoneRow = true
+    var edpShowTimeZoneRow = true
 
     fileprivate var rowThatTogglesDatePicker: Int!
 
@@ -67,22 +64,22 @@ class ViewController: UITableViewController, ExpandableDatePicker {
 // MARK: - UITableViewDataSource
 extension ViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if shouldShowDatePicker(at: indexPath) {
+        if edpShouldShowDatePicker(at: indexPath) {
             let cell = ExpandableDatePickerCell.reusableCell(for: indexPath, in: tableView)
             cell.onDateChanged = {
                 [unowned self] date in
                 self.selectedDate = date
-                self.tableView.reloadRows(at: [IndexPath(row: self.rowThatTogglesDatePicker, section: indexPath.section)], with: .automatic)
+                self.tableView.reloadRows(at: [self.edpLabelIndexPath!], with: .automatic)
             }
 
             cell.datePicker.date = selectedDate
 
             return cell
-        } else if shouldShowTimeZoneRow(at: indexPath) {
+        } else if edpShouldShowTimeZoneRow(at: indexPath) {
             return ExpandableDatePickerTimeZoneCell.reusableCell(for: indexPath, in: tableView, timeZone: selectedTimeZone)
         }
 
-        let modelIndexPath = updatedModelIndexPath(for: indexPath)
+        let modelIndexPath = edpUpdatedModelIndexPath(for: indexPath)
 
         if modelIndexPath.row == rowThatExpandsToDatePicker {
             let cell = ExpandableDatePickerSelectionCell.reusableCell(for: indexPath, in: tableView)
@@ -97,14 +94,14 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count + datePickerRowsShowing
+        return tableData.count + edpDatePickerRowsShowing
     }
 }
 
 // MARK: - UITableViewDelegate
 extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {
+        guard let modelIndexPath = edpTableCellWasSelected(at: indexPath) else {
             // If tableCellWasSelected(at:) returns nil, they clicked on the time zone selector row.
             let vc = ExpandableDatePickerTimeZoneTableViewController {
                 [unowned self] timeZone in
