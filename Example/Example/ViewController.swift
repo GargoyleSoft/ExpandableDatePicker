@@ -25,14 +25,14 @@ import UIKit
 import ExpandableDatePicker
 
 class ViewController: UITableViewController, ExpandableDatePicker {
-    var showTimeZoneRow = true
+    var edpShowTimeZoneRow = true
+    var edpIndexPath: IndexPath?
 
-    fileprivate let tableData = ["One", "Two", "Three", "Four"]
-    fileprivate let rowThatExpandsToDatePicker = 2
+    fileprivate let tableData = ["Some Row", "Start Date", "End Date", "Some Other Row"]
 
-    var datePickerIndexPath: IndexPath?
+    fileprivate var startDate = Date()
+    fileprivate var endDate = Date()
 
-    fileprivate var selectedDate = Date()
     fileprivate var selectedTimeZone = TimeZone.autoupdatingCurrent
 
     override func viewDidLoad() {
@@ -45,26 +45,40 @@ class ViewController: UITableViewController, ExpandableDatePicker {
 // MARK: - UITableViewDataSource
 extension ViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if shouldShowDatePicker(at: indexPath) {
+        if edpShouldShowDatePicker(at: indexPath) {
             let cell = ExpandableDatePickerCell.reusableCell(for: indexPath, in: tableView)
+            cell.datePicker.datePickerMode = .date
             cell.onDateChanged = {
                 [unowned self] date in
-                self.selectedDate = date
-                self.tableView.reloadRows(at: [IndexPath(row: self.rowThatExpandsToDatePicker, section: indexPath.section)], with: .automatic)
+
+                // We know the date picker is showing, so we can just ask for the label's index path directly
+                if self.edpLabelIndexPath!.row == 1 {
+                    self.startDate = date
+                } else {
+                    self.endDate = date
+                }
+
+                self.tableView.reloadRows(at: [self.edpLabelIndexPath!], with: .automatic)
             }
 
-            cell.datePicker.date = selectedDate
+            if self.edpLabelIndexPath!.row == 1 {
+                cell.datePicker.date = self.startDate
+            } else {
+                cell.datePicker.date = self.endDate
+            }
 
             return cell
-        } else if shouldShowTimeZoneRow(at: indexPath) {
+        } else if edpShouldShowTimeZoneRow(at: indexPath) {
             return ExpandableDatePickerTimeZoneCell.reusableCell(for: indexPath, in: tableView, timeZone: selectedTimeZone)
         }
 
-        let modelIndexPath = updatedModelIndexPath(for: indexPath)
+        let modelIndexPath = edpUpdatedModelIndexPath(for: indexPath)
 
-        if modelIndexPath.row == rowThatExpandsToDatePicker {
+        if modelIndexPath.row == 1 || modelIndexPath.row == 2 {
             let cell = ExpandableDatePickerSelectionCell.reusableCell(for: indexPath, in: tableView)
-            cell.detailTextLabel!.text = DateFormatter.localizedString(from: selectedDate, dateStyle: .short, timeStyle: .none)
+
+            let date = modelIndexPath.row == 1 ? startDate : endDate
+            cell.detailTextLabel!.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
 
             return cell
         }
@@ -75,14 +89,14 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count + datePickerRowsShowing
+        return tableData.count + edpDatePickerRowsShowing
     }
 }
 
 // MARK: - UITableViewDelegate {
 extension ViewController {
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {
+        guard let modelIndexPath = edpTableCellWasSelected(at: indexPath) else {
             let vc = ExpandableDatePickerTimeZoneTableViewController {
                 [weak self] timeZone in
                 self?.selectedTimeZone = timeZone
@@ -98,7 +112,7 @@ extension ViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {
+        guard let modelIndexPath = edpTableCellWasSelected(at: indexPath) else {
             let vc = ExpandableDatePickerTimeZoneTableViewController {
                 [weak self] timeZone in
                 self?.selectedTimeZone = timeZone
