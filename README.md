@@ -18,7 +18,7 @@ cell you can use the provided ExpandableDatePickerSelectionCell class.
 
 ### viewDidLoad()
 
-Call *tableView.registerExpandableDatePicker()*.  This registers the cells used internally and **sets the *estimatedRowHeight* of the *UITableView* to 44.0** as the *UIDatePicker* requires expandable cells.
+Call *tableView.registerExpandableDatePicker()*.  This registers the cells used internally and **sets the *estimatedRowHeight* of the *UITableView* to 44.0 and sets the *rowHeight* to _UITableViewAutomaticDimension_** as the *UIDatePicker* requires expandable cells.
 
 ### tableView(\_:cellForRowAt:)
  
