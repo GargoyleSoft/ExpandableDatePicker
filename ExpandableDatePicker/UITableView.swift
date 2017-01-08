@@ -34,5 +34,6 @@ public extension UITableView {
         register(ExpandableDatePickerSelectionCell.self, forCellReuseIdentifier: ExpandableDatePickerSelectionCell.identifier)
 
         estimatedRowHeight = 44.0
+	rowHeight = UITableViewAutomaticDimension
     }
 }
