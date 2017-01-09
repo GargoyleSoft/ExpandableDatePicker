@@ -26,14 +26,17 @@ import UIKit
 /// A custom `UITableViewCell` which is used to show the row which expands into a 
 /// `UIDatePicker` and time zone selection cell.
 open class ExpandableDatePickerSelectionCell : UITableViewCell, ShowsDatePicker {
+    /// The identifier for the cell.  Only necessary if you are overriding registration with a subclass.
     public static let identifier = "0DB89E55-CAB1-4EFB-8D47-01C86D52B106"
 
+    /// :nodoc:
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: ExpandableDatePickerSelectionCell.identifier)
 
         textLabel!.text = NSLocalizedString("Date:", comment: "The date label for a table cell that selects the date")
     }
 
+    /// :nodoc:
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

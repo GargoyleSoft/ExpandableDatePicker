@@ -26,8 +26,10 @@ import UIKit
 
 /// A custom `UITableViewCell` which is used to show the currently selected time zone.
 open class ExpandableDatePickerTimeZoneCell : UITableViewCell {
+    /// The identifier for the cell.  Only necessary if you are overriding registration with a subclass.
     public static let identifier = "FE12D1A9-0CC5-46BD-9BAB-81FCDA1ED7DD"
 
+    /// :nodoc:
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: ExpandableDatePickerTimeZoneCell.identifier)
 
@@ -36,6 +38,7 @@ open class ExpandableDatePickerTimeZoneCell : UITableViewCell {
         accessoryType = .disclosureIndicator
     }
 
+    /// :nodoc:
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

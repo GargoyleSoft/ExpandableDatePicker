@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ExpandableDatePicker Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/ExpandableDatePicker" class="dashAnchor"></a>
+    <a title="ExpandableDatePicker Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ExpandableDatePicker Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/GargoyleSoft/ExpandableDatePicker"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ExpandableDatePicker Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ExpandableDatePicker Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ExpandableDatePickerCell.html">ExpandableDatePickerCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpandableDatePickerSelectionCell.html">ExpandableDatePickerSelectionCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpandableDatePickerTimeZoneCell.html">ExpandableDatePickerTimeZoneCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ExpandableDatePickerTimeZoneTableViewController.html">ExpandableDatePickerTimeZoneTableViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UITableView.html">UITableView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpandableDatePicker.html">ExpandableDatePicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P20ExpandableDatePicker15ShowsDatePicker">ShowsDatePicker</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ExpandableDatePicker</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ExpandableDatePicker</span><span class="p">:</span> <span class="kd">class</span></code></pre>
+
+                </div>
+              </div>
+            <p>View controllers which contain a <code>UITableView</code> that want to display/hide an inline date picker
+should conform to this protocol.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP20ExpandableDatePicker20ExpandableDatePicker12edpIndexPathGSqV10Foundation9IndexPath_"></a>
+                    <a name="//apple_ref/swift/Property/edpIndexPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP20ExpandableDatePicker20ExpandableDatePicker12edpIndexPathGSqV10Foundation9IndexPath_">edpIndexPath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>IndexPath</code> where the date picker is currently showing, or <code>nil</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">edpIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP20ExpandableDatePicker20ExpandableDatePicker9tableViewGSQCSo11UITableView_"></a>
+                    <a name="//apple_ref/swift/Property/tableView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP20ExpandableDatePicker20ExpandableDatePicker9tableViewGSQCSo11UITableView_">tableView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>UITableView</code> used by the view controller</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP20ExpandableDatePicker20ExpandableDatePicker18edpShowTimeZoneRowSb"></a>
+                    <a name="//apple_ref/swift/Property/edpShowTimeZoneRow" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP20ExpandableDatePicker20ExpandableDatePicker18edpShowTimeZoneRowSb">edpShowTimeZoneRow</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether or not a time zone selection row should be displayed when the date picker is shown.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">edpShowTimeZoneRow</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker26edpShowingInlineDatePickerSb"></a>
+                    <a name="//apple_ref/swift/Property/edpShowingInlineDatePicker" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker26edpShowingInlineDatePickerSb">edpShowingInlineDatePicker</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines whether or not an inline date picker is currently showing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">edpShowingInlineDatePicker</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker24edpDatePickerRowsShowingSi"></a>
+                    <a name="//apple_ref/swift/Property/edpDatePickerRowsShowing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker24edpDatePickerRowsShowingSi">edpDatePickerRowsShowing</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number of rows which need to be added to the table view&rsquo;s row count.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">edpDatePickerRowsShowing</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker17edpLabelIndexPathGSqV10Foundation9IndexPath_"></a>
+                    <a name="//apple_ref/swift/Property/edpLabelIndexPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker17edpLabelIndexPathGSqV10Foundation9IndexPath_">edpLabelIndexPath</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>IndexPath</code> of the row that was clicked on to dislay the date picker, or <code>nil</code> if not showing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">edpLabelIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker20edpTimeZoneIndexPathGSqV10Foundation9IndexPath_"></a>
+                    <a name="//apple_ref/swift/Property/edpTimeZoneIndexPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE20ExpandableDatePickerPS_20ExpandableDatePicker20edpTimeZoneIndexPathGSqV10Foundation9IndexPath_">edpTimeZoneIndexPath</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>IndexPath</code> that is showing the time zone row, or <code>nil</code> if it&rsquo;s not showing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">edpTimeZoneIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker24edpUpdatedModelIndexPathFT3forV10Foundation9IndexPath_S2_"></a>
+                    <a name="//apple_ref/swift/Method/edpUpdatedModelIndexPath(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker24edpUpdatedModelIndexPathFT3forV10Foundation9IndexPath_S2_">edpUpdatedModelIndexPath(for:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an updated <code>IndexPath</code> based on whether or not the date picker is displayed.  e.g. If row 3
+is currently showing an inline date picker, then what&rsquo;s displayed in row 5 is really model row 3
+because row 3 is the <code>UIDatePicker</code> and row 4 is the timezone picker.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edpUpdatedModelIndexPath</span><span class="p">(</span><span class="k">for</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>for</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>IndexPath</code> provided by the <code>UITableViewDataSource</code> or <code>UITableViewDelegate</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The actual index into the data model to use, as opposed to <code>indexPath.row</code></p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker23edpShouldShowDatePickerFT2atV10Foundation9IndexPath_Sb"></a>
+                    <a name="//apple_ref/swift/Method/edpShouldShowDatePicker(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker23edpShouldShowDatePickerFT2atV10Foundation9IndexPath_Sb">edpShouldShowDatePicker(at:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines whether or not the indicated <code>indexPath</code> is the row that should currently be displaying
+the inline date picker.  You should call this from <code>tableView(_:cellForRowAt)</code> before doing your other
+work as you don&rsquo;t really have a model row for the <code>UIDatePicker</code></p>
+
+<pre class="highlight plaintext"><code>override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+   if shouldShowDatePicker(at: indexPath) {
+       return ExpandableDatePickerCell.reusableCell(for: indexPath, in: tableView)
+   } else if shouldShowTimeZoneRow(at: indexPath) {
+       return ExpandableDatePickerTimeZoneCell.reusableCell(for: indexPath, in: tableView)
+   }
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edpShouldShowDatePicker</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>IndexPath</code> provided by the <code>UITableViewDataSource</code> or <code>UITableViewDelegate</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> or <code>false</code></p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker24edpShouldShowTimeZoneRowFT2atV10Foundation9IndexPath_Sb"></a>
+                    <a name="//apple_ref/swift/Method/edpShouldShowTimeZoneRow(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker24edpShouldShowTimeZoneRowFT2atV10Foundation9IndexPath_Sb">edpShouldShowTimeZoneRow(at:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determne whether or not the indicated <code>indexPath</code> is the row that should currently be displaying
+the timezone picker.  You should call this from <code>tableView(_:cellForRowAt)</code> before doing your other
+work as you don&rsquo;t really have a model row for the timezone row.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    <p>Parameter indexPath: The <code>IndexPath</code> provided by the <code>UITableViewDataSource</code> or <code>UITableViewDelegate</code></p>
+
+</div>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Always returns <code>false</code> if <code>showTimeZoneRow</code> is false</p>
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <p><code>true</code> or <code>false</code></p>
+
+</div>
+
+<pre class="highlight plaintext"><code>override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+   if shouldShowDatePicker(at: indexPath) {
+       return ExpandableDatePickerCell.reusableCell(for: indexPath, in: tableView)
+   } else if shouldShowTimeZoneRow(at: indexPath) {
+       return ExpandableDatePickerTimeZoneCell.reusableCell(for: indexPath, in: tableView)
+   }
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edpShouldShowTimeZoneRow</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>IndexPath</code> provided by the <code>UITableViewDataSource</code> or <code>UITableViewDelegate</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> or <code>false</code></p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker23edpTableCellWasSelectedFT2atV10Foundation9IndexPath_GSqS2__"></a>
+                    <a name="//apple_ref/swift/Method/edpTableCellWasSelected(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE20ExpandableDatePickerPS_20ExpandableDatePicker23edpTableCellWasSelectedFT2atV10Foundation9IndexPath_GSqS2__">edpTableCellWasSelected(at:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This method should be called whenever a row in the <code>UITableView</code> has been selected.  This will control
+making sure that the date picker row appears and disappears properly.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>You most likely need to also call this on <code>tableView(_:accessoryButtonTappedForRowWith:)</code>.</p>
+
+</div>
+
+<pre class="highlight plaintext"><code>guard let modelIndexPath = tableCellWasSelected(at: indexPath) else {
+    let vc = ExpandableDatePickerTimeZoneTableViewController {
+        timeZone in
+        self.selectedTimeZone = timeZone
+    }
+
+    navigationController!.pushViewController(vc, animated: true)
+
+    return
+}
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edpTableCellWasSelected</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>at</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>IndexPath</code> provided by the <code>UITableViewDataSource</code> or <code>UITableViewDelegate</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An updated <code>IndexPath</code> that accounts for whether or not the date picker is displayed.  If they picked the Time Zone row, then we return <code>nil</code> to signal that.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/GargoyleSoft/ExpandableDatePicker" target="_blank" rel="external">Gargoyle Software</a>. All rights reserved. (Last updated: 2017-01-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

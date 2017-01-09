@@ -140,7 +140,7 @@ extension ShortTimeZoneDelegate: UITableViewDelegate {
 
 // MARK: - UISearchResultsUpdating
 extension ShortTimeZoneDelegate : UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
+    internal func updateSearchResults(for searchController: UISearchController) {
         defer { tableView.reloadData() }
 
         let all = tableData.flatMap { $0 }

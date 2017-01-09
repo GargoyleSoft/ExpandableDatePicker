@@ -25,16 +25,22 @@
 import UIKit
 
 /// This protocol should be applied to the `UITableViewCell` which is *selected* to make a date picker
-/// appear or disappear.
-/// - note: Do not place this on the `UITableViewCell` that actually *displays* the `UIDatePicker`
+/// appear or disappear. 
+///
+/// **Note**: Do not place this on the `UITableViewCell` that actually *displays* the `UIDatePicker`
 public protocol ShowsDatePicker: class { }
 
 
 /// View controllers which contain a `UITableView` that want to display/hide an inline date picker
 /// should conform to this protocol.
 public protocol ExpandableDatePicker: class {
+    /// The `IndexPath` where the date picker is currently showing, or `nil`
     var edpIndexPath: IndexPath? { get set }
+
+    /// The `UITableView` used by the view controller
     var tableView: UITableView! { get set }
+
+    /// Whether or not a time zone selection row should be displayed when the date picker is shown.
     var edpShowTimeZoneRow: Bool { get set }
 }
 

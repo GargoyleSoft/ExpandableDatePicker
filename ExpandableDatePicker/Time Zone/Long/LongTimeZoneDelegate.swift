@@ -198,7 +198,7 @@ extension LongTimeZoneDelegate: UITableViewDelegate {
 
 // MARK: - UISearchResultsUpdating
 extension LongTimeZoneDelegate : UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
+    internal func updateSearchResults(for searchController: UISearchController) {
         defer { tableView.reloadData() }
 
         let all = TimeZone.knownTimeZoneIdentifiers

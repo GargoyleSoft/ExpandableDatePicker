@@ -1,0 +1,6 @@
+author: Gargoyle Software
+github_url: https://github.com/GargoyleSoft/ExpandableDatePicker 
+module: ExpandableDatePicker
+source_directory: .
+readme: README.md
+output: docs

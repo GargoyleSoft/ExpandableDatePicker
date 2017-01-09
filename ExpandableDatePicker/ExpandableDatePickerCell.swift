@@ -25,11 +25,17 @@ import UIKit
 
 /// A custom `UITableViewCell` which is used to show the `UIDatePicker`
 open class ExpandableDatePickerCell : UITableViewCell {
+    /// The identifier for the cell.  Only necessary if you are overriding registration with a subclass.
     public static let identifier = "1D72FAC3-6D57-4D57-AF49-386E37BF0089"
 
+    /// The `UIDatePicker` contained in the cell.
     public var datePicker: UIDatePicker!
+
+    /// The method to call when the date is changed.
     public var onDateChanged: ((Date) -> Void)!
 
+
+    /// :nodoc:
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: ExpandableDatePickerCell.identifier)
 
@@ -48,6 +54,7 @@ open class ExpandableDatePickerCell : UITableViewCell {
         ])
     }
 
+    /// :nodoc:
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

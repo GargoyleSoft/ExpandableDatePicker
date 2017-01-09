@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.name         = "ExpandableDatePicker"
   s.summary      = "Expandable UIDatePicker and TimeZone selection for UITableView"
-  s.version      = "0.8.1"
+  s.version      = "0.8.2"
   s.license      = 'MIT'
   s.author             = { "Scott Grosch" => "Scott.Grosch@icloud.com" }
   s.homepage     = "https://github.com/GargoyleSoft/ExpandableDatePicker"

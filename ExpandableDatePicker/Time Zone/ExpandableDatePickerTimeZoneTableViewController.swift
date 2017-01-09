@@ -34,12 +34,17 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
     fileprivate var longTimeZoneDelegate: LongTimeZoneDelegate?
     fileprivate var shortTimeZoneDelegate: ShortTimeZoneDelegate?
 
+
+    /// Designated initializer.
+    ///
+    /// - Parameter onTimeZoneChosen: The method to call when a time zone is selected.
     public init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
         self.onChosen = onTimeZoneChosen
 
         super.init(style: .plain)
     }
 
+    /// :nodoc:
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,6 +67,7 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         perform(#selector(segmentValueChanged(segment:)), with: segment)
     }
 
+    /// :nodoc:
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
