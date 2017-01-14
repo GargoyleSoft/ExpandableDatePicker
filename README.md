@@ -28,7 +28,7 @@ For the row which is supposed to return the current value of the date, and the o
 
 ### tableView(\_:accessoryButtonTappedForRowWith:) and tableView(\_:didSelectRowAt:)
 
-You definitely need to call *edpTableCellWasSelected(at:)* first and examine the output.  You'll either get back *nil* or an updated *IndexPath* value.  If it's *nil* then they tapped on the row which is used to pick a time zone.  You simply push an *ExpandableDatePickerTimeZoneTableViewController* (whew!) onto your *UINavigationController*.  Your callback will be given a *TimeZone* object which you should store in your local data model and then update your *UITableView*
+You definitely need to call *edpTableCellWasSelected(at:)* first and examine the output.  You'll either get back *nil* or an updated *IndexPath* value.  If it's *nil* then they tapped on the row which is used to pick a time zone.  You simply push an *ExpandableDatePickerTimeZoneTableViewController* (whew!) onto your *UINavigationController*.  Your callback will be given a *TimeZone* object which you should store in your local data model and then update your *UITableView*.  You can pass an optional *segmentTintColor* as a parameter to the constructor if you need the segment placed in the navigation bar to have a different color than the default Apple uses.
 
 ### tableView(\_:numberOfRowsInSection)
 

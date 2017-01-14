@@ -34,12 +34,16 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
     fileprivate var longTimeZoneDelegate: LongTimeZoneDelegate?
     fileprivate var shortTimeZoneDelegate: ShortTimeZoneDelegate?
 
+    private let segmentTintColor: UIColor?
 
     /// Designated initializer.
     ///
-    /// - Parameter onTimeZoneChosen: The method to call when a time zone is selected.
-    public init(onTimeZoneChosen: @escaping (TimeZone) -> Void) {
+    /// - Parameters:
+    ///   - segmentTintColor: The tint color to use for the segment picker added to the navigation bar
+    ///   - onTimeZoneChosen: The method to call when a time zone is selected.
+    public init(segmentTintColor: UIColor? = nil, onTimeZoneChosen: @escaping (TimeZone) -> Void) {
         self.onChosen = onTimeZoneChosen
+        self.segmentTintColor = segmentTintColor
 
         super.init(style: .plain)
     }
@@ -55,6 +59,10 @@ public class ExpandableDatePickerTimeZoneTableViewController : UITableViewContro
         segment.sizeToFit()
         segment.selectedSegmentIndex = 0
         segment.addTarget(self, action: #selector(segmentValueChanged(segment:)), for: .valueChanged)
+
+        if let segmentTintColor = segmentTintColor {
+            segment.tintColor = segmentTintColor
+        }
 
         navigationItem.titleView = segment
 
