@@ -34,7 +34,7 @@ internal class ShortTimeZoneCellData: NSObject {
         super.init()
     }
 
-    func displayName() -> String {
+    @objc func displayName() -> String {
         return "\(abbrev) (\(full))"
     }
 }
