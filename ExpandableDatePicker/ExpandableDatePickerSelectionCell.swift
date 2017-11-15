@@ -1,7 +1,7 @@
 //
 //  ExpandableDatePickerSelectionCell.swift
 //
-//  Copyright © 2016 Gargoyle Software, LLC
+//  Copyright © 2016 - 2018 Gargoyle Software, LLC
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
